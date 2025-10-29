@@ -1,0 +1,34 @@
+/build
+
+# Gradle
+.gradle/
+build/
+**/build/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IntelliJ / Android Studio
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Local configuration
+local.properties
+
+# Kotlin/Java
+out/
+
+# Cache / Temp
+.cache/
+
+
+gradle.properties
+gpr.usr=GITHUB_USERID
+gpr.key=PERSONAL_ACCESS_TOKEN
