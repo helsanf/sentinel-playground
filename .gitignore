@@ -98,3 +98,6 @@ Thumbs.db
 # Cache / Temp
 .cache/
 
+gradle.properties
+github.properties
+
