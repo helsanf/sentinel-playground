@@ -11,7 +11,7 @@ val githubProperties = Properties().apply {
 }
 
 // Function to retrieve version name
-fun getVersionName(): String = "1.0.1" // Replace with version name
+fun getVersionName(): String = "1.0.2" // Replace with version name
 
 // Function to retrieve artifact ID
 fun getMyArtifactId(): String = "sentinel" // Replace with library name ID
