@@ -3,7 +3,6 @@ package com.edtslib
 import android.app.Application
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.work.Configuration
 import com.edtslib.di.interactorModule
 import com.edtslib.di.mainAppModule
 import com.edtslib.di.networkingModule
@@ -12,16 +11,13 @@ import com.edtslib.di.sharedPreferencesModule
 import com.edtslib.di.viewModule
 import com.edtslib.domain.model.SentinelUser
 import org.koin.android.ext.koin.androidContext
-import org.koin.androidx.workmanager.factory.KoinWorkerFactory
-import org.koin.androidx.workmanager.koin.workManagerFactory
 import org.koin.core.KoinApplication
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.koin.core.context.startKoin
 import kotlin.getValue
 
-class Sentinel private constructor() : KoinComponent,
-    Configuration.Provider {
+class Sentinel private constructor() : KoinComponent {
     private val viewModel: SentinelViewModel? by inject()
 
     companion object {
@@ -62,7 +58,6 @@ class Sentinel private constructor() : KoinComponent,
             startKoin {
                 androidContext(application)
                 androidContext(application.applicationContext)
-                workManagerFactory()
                 modules(
                     listOf(
                         networkingModule,
@@ -161,10 +156,4 @@ class Sentinel private constructor() : KoinComponent,
                 )?.versionName
             }
     }
-
-    override val workManagerConfiguration: Configuration
-        get() = Configuration.Builder()
-            .setMinimumLoggingLevel(android.util.Log.DEBUG)
-            .setWorkerFactory(KoinWorkerFactory())
-            .build()
 }

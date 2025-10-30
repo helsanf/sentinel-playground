@@ -11,7 +11,7 @@ val githubProperties = Properties().apply {
 }
 
 // Function to retrieve version name
-fun getVersionName(): String = "1.0.2" // Replace with version name
+fun getVersionName(): String = "1.0.3" // Replace with version name
 
 // Function to retrieve artifact ID
 fun getMyArtifactId(): String = "sentinel" // Replace with library name ID
@@ -102,8 +102,6 @@ dependencies {
     /* coroutines */
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.workManager)
-    implementation(libs.koin.androidx.workmanager)
     implementation(libs.androidx.core.ktx.coreKtxVersion)
 
     implementation(libs.androidx.security.crypto.ktx)
