@@ -85,6 +85,7 @@ class Sentinel private constructor() : KoinComponent {
             versionName: String? = null,
             flushInterval: Int = 0,
             flushSize: Int = 0,
+            getUser: () -> SentinelUser
         ) {
             setup(
                 application = application,
