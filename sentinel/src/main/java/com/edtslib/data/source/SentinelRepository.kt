@@ -5,7 +5,6 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 import com.edtslib.SentinelAlarmReceiver
 import com.edtslib.Sentinel
 import com.edtslib.data.source.local.ConfigurationLocalSource
@@ -101,9 +100,6 @@ class SentinelRepository(
             userName = user.userName,
             sessionId = configurationLocalSource.getSessionId()
         )
-
-        Log.d("abah", "abah send size: $userRequest")
-
 
         val data = SentinelRequest(
             core = coreRequest,
