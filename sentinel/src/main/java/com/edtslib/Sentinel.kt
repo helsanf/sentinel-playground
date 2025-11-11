@@ -10,6 +10,8 @@ import com.edtslib.di.repositoryModule
 import com.edtslib.di.sharedPreferencesModule
 import com.edtslib.di.viewModule
 import com.edtslib.domain.model.SentinelUser
+import com.edtslib.utils.session.SessionTimeout
+import com.edtslib.utils.session.SessionTimeoutDelegate
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.KoinApplication
 import org.koin.core.component.KoinComponent
@@ -22,12 +24,14 @@ class Sentinel private constructor() : KoinComponent {
 
     companion object {
         private var sentinel: Sentinel? = null
+
         var appVersion = ""
         var baseUrl = ""
         var apiKey = ""
         var flushInterval = 60000
         var flushSize = 100
         var debugging = false
+        var sessionTimeout = 30 // in minutes
         var getUser = {
             SentinelUser(
                 userId = null,
@@ -42,6 +46,7 @@ class Sentinel private constructor() : KoinComponent {
             flushInterval: Int = 0,
             flushSize: Int = 0,
             versionName: String? = null,
+            sessionTimeout: Int = 30,
             getUser: () -> SentinelUser
         ) {
 
@@ -52,7 +57,8 @@ class Sentinel private constructor() : KoinComponent {
                 getUser = getUser,
                 versionName = versionName,
                 flushInterval = flushInterval,
-                flushSize = flushSize
+                flushSize = flushSize,
+                sessionTimeout = sessionTimeout
             )
 
             startKoin {
@@ -85,6 +91,7 @@ class Sentinel private constructor() : KoinComponent {
             versionName: String? = null,
             flushInterval: Int = 0,
             flushSize: Int = 0,
+            sessionTimeout: Int = 30,
             getUser: () -> SentinelUser
         ) {
             setup(
@@ -94,7 +101,8 @@ class Sentinel private constructor() : KoinComponent {
                 getUser = getUser,
                 versionName = versionName,
                 flushInterval = flushInterval,
-                flushSize = flushSize
+                flushSize = flushSize,
+                sessionTimeout = sessionTimeout
             )
 
             koin.modules(
@@ -132,6 +140,7 @@ class Sentinel private constructor() : KoinComponent {
             flushInterval: Int,
             flushSize: Int,
             versionName: String?,
+            sessionTimeout: Int,
             getUser: () -> SentinelUser
         ) {
 
@@ -140,7 +149,10 @@ class Sentinel private constructor() : KoinComponent {
             Companion.getUser = getUser
             Companion.flushInterval = flushInterval
             Companion.flushSize = flushSize
+            Companion.sessionTimeout = sessionTimeout
             appVersion = versionName ?: getVersionName(application) ?: ""
+
+            setupSessionTimeOut(application)
         }
 
         private fun getVersionName(application: Application) =
@@ -156,5 +168,20 @@ class Sentinel private constructor() : KoinComponent {
                     PackageManager.GET_CONFIGURATIONS
                 )?.versionName
             }
+
+        private fun setupSessionTimeOut(application: Application) {
+            val sessionTimeOut = SessionTimeout(
+                application = application,
+                interval = sessionTimeout
+            )
+
+            sessionTimeOut.delegate = object : SessionTimeoutDelegate {
+                override fun onTimeOut() {
+                    sentinel?.viewModel?.doCreateSession()
+                }
+
+            }
+
+        }
     }
 }

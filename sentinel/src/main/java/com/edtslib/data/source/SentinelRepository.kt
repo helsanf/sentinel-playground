@@ -17,7 +17,6 @@ import com.edtslib.data.source.remote.request.SentinelCoreRequest
 import com.edtslib.data.source.remote.request.SentinelNetworkRequest
 import com.edtslib.data.source.remote.request.SentinelRequest
 import com.edtslib.data.source.remote.request.SentinelUserRequest
-import com.edtslib.domain.model.SentinelGroup
 import com.edtslib.domain.repository.ISentinelRepository
 import kotlinx.coroutines.flow.flow
 import java.util.*
@@ -103,6 +102,9 @@ class SentinelRepository(
             sessionId = configurationLocalSource.getSessionId()
         )
 
+        Log.d("abah", "abah send size: $userRequest")
+
+
         val data = SentinelRequest(
             core = coreRequest,
             user = userRequest,
@@ -157,7 +159,6 @@ class SentinelRepository(
         alarmManager = null
 
         val cached = localSource.getCached()
-        Log.d("abah", "abah send size: {${cached?.size ?: 0}} $cached")
         if(cached?.isNotEmpty() == true){
             remoteSource.send(cached)
             localSource.clear()

@@ -15,6 +15,12 @@ class SentinelViewModel(
 ) : ViewModel() {
     fun createSession() = trackerUseCase.createSession().asLiveData()
 
+    fun doCreateSession() {
+        viewModelScope.launch(Dispatchers.IO) {
+            trackerUseCase.createSession().collect()
+        }
+    }
+
     fun setUserId(userId: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             trackerUseCase.setUserId(userId).collect()
