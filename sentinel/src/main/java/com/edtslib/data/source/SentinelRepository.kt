@@ -7,6 +7,7 @@ import android.content.Intent
 import android.os.Build
 import com.edtslib.SentinelAlarmReceiver
 import com.edtslib.Sentinel
+import com.edtslib.data.base.Result
 import com.edtslib.data.source.local.ConfigurationLocalSource
 import com.edtslib.data.source.local.SentinelQueueLocalDataSource
 import com.edtslib.data.source.local.entity.Configuration
@@ -156,8 +157,11 @@ class SentinelRepository(
 
         val cached = localSource.getCached()
         if(cached?.isNotEmpty() == true){
-            remoteSource.send(cached)
             localSource.clear()
+            val response = remoteSource.send(cached)
+            if (response.status != Result.Status.SUCCESS) {
+                localSource.add(cached)
+            }
         }
 
     }

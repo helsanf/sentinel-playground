@@ -31,4 +31,20 @@ class SentinelQueueLocalDataSource(sharedPreferences: SharedPreferences):
             }
         }
     }
+
+    suspend fun add(request: List<SentinelRequest>): List<SentinelRequest>? {
+        mutex.withLock {
+            try {
+                val cached = getCached()
+                val list = cached?.toMutableList() ?: mutableListOf()
+                list.addAll(request)
+
+                save(list)
+                return list
+            } catch (_: Exception) {
+                // nothing to do
+                return null
+            }
+        }
+    }
 }
