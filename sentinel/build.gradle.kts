@@ -10,11 +10,8 @@ val githubProperties = Properties().apply {
     load(FileInputStream(rootProject.file("github.properties")))
 }
 
-// Function to retrieve version name
-fun getVersionName(): String = "1.0.9" // Replace with version name
-
-// Function to retrieve artifact ID
-fun getMyArtifactId(): String = "sentinel" // Replace with library name ID
+fun getVersionName(): String = "1.0.10"
+fun getMyArtifactId(): String = "sentinel"
 
 val baseUrl: String = project.property("api_base_url_sentinel") as String
 
@@ -51,26 +48,31 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()      // Users can "Go to Definition" in their IDE
+            withJavadocJar()      // Better documentation support
+        }
+    }
 }
 project.afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("bar") {
-                groupId = "io.edts" // Replace with group ID
+                from(components["release"])
+                groupId = "io.edts"
                 artifactId = getMyArtifactId()
                 version = getVersionName()
-                artifact("$buildDir/outputs/aar/${getMyArtifactId()}-release.aar")
             }
         }
 
         repositories {
             maven {
                 name = "GitHubPackages"
-                // Configure the URL of your package repository on GitHub
-                url = uri("https://maven.pkg.github.com/helsanf/sentinel-playground") // Replace with GitHub details
+                url = uri("https://maven.pkg.github.com/helsanf/sentinel-playground")
 
                 credentials {
-                    // Use GitHub properties or environment variables for credentials
                     username = githubProperties["GITHUB_USERID"] as String? ?: System.getenv("GPR_USER")
                     password = githubProperties["PERSONAL_ACCESS_TOKEN"] as String? ?: System.getenv("GPR_API_KEY")
                 }
