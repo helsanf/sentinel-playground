@@ -88,8 +88,8 @@ class SentinelRepository(
         val coreRequest = SentinelCoreRequest(
             eventAction = group,
             eventName = name,
-            eventId = eventId,
-            eventTimeStamp = Date().time.toString(),
+            eventId = "$eventId",
+            eventTimeStamp = Date().time / 1000,
             eventSource = "android",
             details = details,
             userDetails = userDetails

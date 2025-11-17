@@ -6,7 +6,7 @@ data class SentinelUserRequest (
     @SerializedName("session_id")
     val sessionId: String?,
     @SerializedName("user_id")
-    val userId: Long?,
+    val userId: String?,
     @SerializedName("user_name")
     val userName: String?
 )

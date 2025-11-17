@@ -8,9 +8,9 @@ data class SentinelCoreRequest (
     @SerializedName("event_name")
     val eventName: String,
     @SerializedName("event_id")
-    val eventId: Long,
+    val eventId: String,
     @SerializedName("event_timestamp")
-    val eventTimeStamp: String,
+    val eventTimeStamp: Long,
     @SerializedName("source")
     val eventSource: String,
     @SerializedName("event_details")

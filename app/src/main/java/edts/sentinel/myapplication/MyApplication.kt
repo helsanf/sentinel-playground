@@ -15,7 +15,7 @@ class MyApplication: Application() {
             flushSize = 9,
             sessionTimeout = 1,
             getUser = {
-                SentinelUser(1, "")
+                SentinelUser("1", "")
             }
         )
     }

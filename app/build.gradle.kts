@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
 }
-
 val baseUrl: String = project.property("api_base_url_sentinel") as String
 
 android {

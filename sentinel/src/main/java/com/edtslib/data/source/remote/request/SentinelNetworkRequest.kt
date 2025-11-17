@@ -14,7 +14,7 @@ data class SentinelNetworkRequest (
     @SerializedName("city")
     val city: String?,
     @SerializedName("zipcode")
-    val zipcode: String?,
+    val zipcode: Int?,
     @SerializedName("latitude")
     val latitude: Double?,
     @SerializedName("longitude")
@@ -27,10 +27,10 @@ data class SentinelNetworkRequest (
             return SentinelNetworkRequest(ipAddress = ConnectivityUtil.getIPAddress(true),
                 latitude = latitude,
                 longitude = longitude,
-                zipcode = "",
-                city = "",
-                country = "",
-                networkIsp = "")
+                zipcode = 0,
+                city = null,
+                country = null,
+                networkIsp = null)
         }
     }
 }

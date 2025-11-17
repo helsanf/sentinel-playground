@@ -121,6 +121,8 @@ class Sentinel private constructor() : KoinComponent {
             }
         }
 
+        fun createSession() = sentinel?.viewModel?.createSession()
+
         /*** track ***/
 
         fun track(group : String,name: String, details: Any? = null, userDetails: Any? = null) =
