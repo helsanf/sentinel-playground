@@ -87,32 +87,32 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.androidx.preference.ktx)
+    api(libs.androidx.preference.ktx)
 
     //koin
-    implementation(libs.koin.core)
-    implementation(libs.koin.android)
+    api(libs.koin.core)
+    api(libs.koin.android)
 
     // Networking
-    implementation(libs.retrofit)
-    implementation(libs.converter.gson)
-    implementation(libs.okhttp)
-    implementation(libs.logging.interceptor)
-    implementation(libs.stetho)
-    implementation(libs.stetho.okhttp3)
+    api(libs.retrofit)
+    api(libs.converter.gson)
+    api(libs.okhttp)
+    api(libs.logging.interceptor)
+    api(libs.stetho)
+    api(libs.stetho.okhttp3)
 
     /* coroutines */
-    implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.kotlinx.coroutines.core)
+    api(libs.kotlinx.coroutines.android)
+    api(libs.kotlinx.coroutines.core)
 
-    implementation(libs.androidx.security.crypto.ktx)
-    implementation(libs.converter.gson)
+    api(libs.androidx.security.crypto.ktx)
+    api(libs.converter.gson)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+    api(libs.androidx.lifecycle.viewmodel.ktx)
+    api(libs.androidx.lifecycle.livedata.ktx)
+    api(libs.androidx.lifecycle.runtime.ktx)
 }
