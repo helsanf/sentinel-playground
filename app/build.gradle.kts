@@ -6,7 +6,7 @@ val baseUrl: String = project.property("api_base_url_sentinel") as String
 
 android {
     namespace = "edts.sentinel.myapplication"
-    compileSdk = 36
+    compileSdk = 34
 
     buildFeatures {
         buildConfig = true
@@ -15,7 +15,7 @@ android {
     defaultConfig {
         applicationId = "edts.sentinel.myapplication"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -33,11 +33,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "1.8"
     }
 }
 

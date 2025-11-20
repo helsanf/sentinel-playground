@@ -17,7 +17,7 @@ val baseUrl: String = project.property("api_base_url_sentinel") as String
 
 android {
     namespace = "com.edtslib"
-    compileSdk = 36
+    compileSdk = 34
 
     buildFeatures {
         buildConfig = true
@@ -42,11 +42,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "1.8"
     }
 
     publishing {
@@ -104,7 +104,6 @@ dependencies {
     /* coroutines */
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
-    implementation(libs.androidx.core.ktx.coreKtxVersion)
 
     implementation(libs.androidx.security.crypto.ktx)
     implementation(libs.converter.gson)
@@ -113,4 +112,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
 }
