@@ -22,9 +22,7 @@ data class SentinelApplicationRequest (
     @SerializedName("app_version")
     val appVersion: String,
     @SerializedName("device_id")
-    val deviceId: String?,
-    @SerializedName("source_name")
-    val sourceName: String?
+    val deviceId: String?
 ) {
     companion object {
         @SuppressLint("HardwareIds")
@@ -56,8 +54,7 @@ data class SentinelApplicationRequest (
                 deviceClassName = className,
                 deviceFamilyName = familyName,
                 appVersion = Sentinel.appVersion,
-                deviceId = deviceID,
-                sourceName = "apps"
+                deviceId = deviceID
             )
         }
     }
