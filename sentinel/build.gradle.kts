@@ -10,7 +10,7 @@ val githubProperties = Properties().apply {
     load(FileInputStream(rootProject.file("github.properties")))
 }
 
-fun getVersionName(): String = "1.0.10-poinku"
+fun getVersionName(): String = "1.0.10-poinku.1"
 fun getMyArtifactId(): String = "sentinel"
 
 val baseUrl: String = project.property("api_base_url_sentinel") as String
