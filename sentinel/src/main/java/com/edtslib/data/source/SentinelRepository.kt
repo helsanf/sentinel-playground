@@ -128,11 +128,22 @@ class SentinelRepository(
                 )
 
                 alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-                alarmManager?.setExactAndAllowWhileIdle(
-                    AlarmManager.RTC_WAKEUP,
-                    System.currentTimeMillis() + Sentinel.flushInterval * 1000,
-                    pendingIntent
-                )
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    if (alarmManager?.canScheduleExactAlarms() == true) {
+                        alarmManager?.setAndAllowWhileIdle(
+                            AlarmManager.RTC_WAKEUP,
+                            System.currentTimeMillis() + Sentinel.flushInterval * 1000,
+                            pendingIntent
+                        )
+                    }
+                    else {
+                        alarmManager?.set(
+                            AlarmManager.RTC_WAKEUP,
+                            System.currentTimeMillis() + Sentinel.flushInterval * 1000,
+                            pendingIntent
+                        )
+                    }
+                }
             }
         }
 
