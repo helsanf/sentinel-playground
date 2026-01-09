@@ -10,7 +10,7 @@ val githubProperties = Properties().apply {
     load(FileInputStream(rootProject.file("github.properties")))
 }
 
-fun getVersionName(): String = "1.0.10"
+fun getVersionName(): String = "1.0.12"
 fun getMyArtifactId(): String = "sentinel"
 
 val baseUrl: String = project.property("api_base_url_sentinel") as String
@@ -28,6 +28,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+        buildConfigField("String","BASE_URL","\"$baseUrl\"")
     }
 
     buildTypes {

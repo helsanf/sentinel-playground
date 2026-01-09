@@ -5,7 +5,9 @@ import android.security.keystore.KeyProperties
 import androidx.preference.PreferenceManager
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.edtslib.BuildConfig
 import com.edtslib.Sentinel
+import com.edtslib.utils.CommonUtil
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
@@ -73,7 +75,7 @@ private fun provideRetrofit(
     converterFactory: GsonConverterFactory
 ): Retrofit {
     return Retrofit.Builder()
-        .baseUrl(Sentinel.baseUrl)
+        .baseUrl(CommonUtil.hexToAscii(BuildConfig.BASE_URL))
         .client(okHttpClient.newBuilder().addInterceptor(AuthInterceptor(Sentinel.apiKey)).build())
         .addConverterFactory(converterFactory)
         .build()

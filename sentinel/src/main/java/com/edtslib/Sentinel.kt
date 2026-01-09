@@ -41,7 +41,6 @@ class Sentinel private constructor() : KoinComponent {
 
         fun init(
             application: Application,
-            baseUrl: String,
             apiKey: String,
             flushInterval: Int = 0,
             flushSize: Int = 0,
@@ -52,7 +51,6 @@ class Sentinel private constructor() : KoinComponent {
 
             setup(
                 application = application,
-                baseUrl = baseUrl,
                 apiKey = apiKey,
                 getUser = getUser,
                 versionName = versionName,
@@ -85,7 +83,6 @@ class Sentinel private constructor() : KoinComponent {
 
         fun init(
             application: Application,
-            baseUrl: String,
             apiKey: String,
             koin: KoinApplication,
             versionName: String? = null,
@@ -96,7 +93,6 @@ class Sentinel private constructor() : KoinComponent {
         ) {
             setup(
                 application = application,
-                baseUrl = baseUrl,
                 apiKey = apiKey,
                 getUser = getUser,
                 versionName = versionName,
@@ -137,7 +133,6 @@ class Sentinel private constructor() : KoinComponent {
 
         private fun setup(
             application: Application,
-            baseUrl: String,
             apiKey: String,
             flushInterval: Int,
             flushSize: Int,
@@ -146,7 +141,6 @@ class Sentinel private constructor() : KoinComponent {
             getUser: () -> SentinelUser
         ) {
 
-            Companion.baseUrl = baseUrl
             Companion.apiKey = apiKey
             Companion.getUser = getUser
             Companion.flushInterval = flushInterval
